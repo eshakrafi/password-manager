@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Password Manager</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        max-width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="text"], input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        margin: 5px 0 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 10px;
+    }
+
+    li:last-child {
+        margin-bottom: 0;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Password Manager</h1>
+    <form id="passwordForm">
+        <label for="website">Website:</label>
+        <input type="text" id="website" name="website" required>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">Save Password</button>
+    </form>
+
+    <h2>Saved Passwords</h2>
+    <ul id="passwordList"></ul>
+  
+   <h1>Password Manager</h1>
+        <div class="password-container">
+            <input type="text" id="generatedPassword" readonly>
+            <button onclick="generatePassword()">Generate Password</button>
+        </div>
+  
+  
+</div>
+
+<script>
+    const passwordForm = document.getElementById('passwordForm');
+    const passwordList = document.getElementById('passwordList');
+
+    passwordForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const website = this.website.value;
+        const username = this.username.value;
+        const password = this.password.value;
+
+        const listItem = document.createElement('li');
+        listItem.textContent = `Website: ${website}, Username: ${username}, Password: ${password}`;
+
+        passwordList.appendChild(listItem);
+
+        this.reset();
+    });
+  
+function generatePassword() {
+            const length = 12; // Change the length as needed
+            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+
+            let password = "";
+            for (let i = 0; i < length; i++) {
+                const randomIndex = Math.floor(Math.random() * charset.length);
+                password += charset[randomIndex];
+            }
+
+            document.getElementById("generatedPassword").value = password;
+        }
+  
+  
+  
+  
+  
+  
+  
+  
+</script>
+
+</body>
+</html>
+
